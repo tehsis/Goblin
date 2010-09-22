@@ -20,7 +20,7 @@
  
  
  print "Please wait while we add the site...";
- store("http://taringa.net");
+ store(shift);
  print "Done! \n";
 
  sub store { 
