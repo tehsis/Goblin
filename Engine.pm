@@ -13,18 +13,18 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with "The Goblin search engine".  If not, see <http://www.gnu.org/licenses/>.
+# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
-package db;
+package Engine;
 
-use MongoDB;
+use strict;
+use warnings;
 
 sub new {
 	my $class = shift;
 	
 	my $self = {
-		data => {},
-		coll => undef,
+		sites => [],
 	};
 	
 	bless($self,$class);
@@ -32,66 +32,23 @@ sub new {
 	return $self;
 }
 
-sub data {
+sub search { 
 	my $self = shift;
 	
 	if(@_) {
-		$self->{data} = shift;
-	}
-	
-	return $self->{data};
-}
-
-sub save {
-	my $self = shift;
-	
-    my $id = $self->{coll}->insert($self->{data});	
-    
-    return $id;
-	
-}
-
-sub exists {
-	my $self = shift;
-	
-	if(@_) {
-	  my $search = shift;
-	  
-	  return 1 if $self->{coll}->find_one($search);	
+		use db;
+		my $host = "localhost:27017";
+		my $db = db->new;
+		$db->connectMongo($host);
 		
+		my $cursor = $db->search({TAGS => {'$all' => shift}});
+		
+		foreach my $object ($cursor->next) {
+			push(@{$self->{sites}},$object->{URL});
+		}
 	}
 	
-	return 0;
-	
-}
-
-sub search {
-	my $self = shift;
-	
-	if(@_) {
-	  return $self->{coll}->find(shift);
-	}
-	
-	return 0;
-}
-
-sub self {
-	my $self = shift;
-	
-	return $self;
-}
-
-sub connectMongo {
-	$self = shift;
-	
-	if(@_) {
-	 my $host = shift;
-	 my $conn = MongoDB::Connection->new("host" => $host);
-	 my $db = $conn->sengine;
-	 return 1 if $self->{coll} = $db->sites;
-	}
-	
-	return 0;
-}
+	return $self->{sites};
+} 
 
 1;

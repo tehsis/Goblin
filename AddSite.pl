@@ -19,9 +19,12 @@
  use warnings;
  
  
- print "Please wait while we add the site...";
- store(shift);
- print "Done! \n";
+ print "Please wait while we add the site... \n";
+ if(store(shift)) {
+  print "Done! \n";
+ } else {
+ 	print "Couldn't add the new site. Are you running MongoDB and is a new site? \n";
+ }
 
  sub store { 
  	#TODO: Make this sub cleaner. Actually is a mess. 
@@ -37,41 +40,51 @@
  	
  	my $url = shift;
  	
- 	my $nsite = Sites->new;
- 	$nsite->url($url);
+ 	my $host = "localhost:27017";
+ 	
+ 	
+ 	my $nsite = Sites->new; $nsite->url($url);
+ 	my $ntags = undef;
+ 	my $ntitle = undef;
+ 	my $ndesc = undef;
  	
  	my $fetch = Fetcher->new;
  	
  	$fetch->content($nsite->url);
  	
- 	(my $ht,my $ntags) =  ($fetch->content =~ m!<meta (name=['"]keywords['"] content=["'](.+)["'])|
- 	                      (content=["'](.+)["'] name=['"]keywords['"])!i);
+ 	#Looks for tags
+ 	($ntags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i unless $ntags;
+ 	($ntags) =  $fetch->content =~ m!<meta name=['"]keywords['"] content=["']\s*(.+)\s*["']!;
  	                      
- 	($ntags) = $nsite->url =~ m!http://(.+)! unless $ntags;
- 	                      
  	
- 	($ht,my $ndesc) = ($fetch->content =~ m!<meta (name=["']description["'] content=['"](.+)["'])|
- 	                    (content=['"](.+)["'] name=["']description["'])!i);
- 	                    
- 	 $ndesc = $nsite->url unless $ndesc;
+ 	#Looks for description
+ 	($ndesc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i unless $ndesc;
+ 	($ndesc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
  	
+ 	#looks for title
+ 	($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i unless $ntitle;
+ 	($ntitle) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
+ 	($ntitle) = $fetch->content =~ m!<title>(.+)</title>!i unless $ntitle;
  	
- 	($ht, my $tag, my $ntitle) = $fetch->content =~ m!(<meta (name=["']Title["'] content=["'](.+)["'])|
- 	               (content=["'](.+)["'] name=["']title["']))!i;
- 	               
- 	$ntitle = $fetch->content =~ m!<title>(.+)</title>!i unless $ntitle;
+ 	#If any of the previously looked site's attribute were not found, 
+ 	#it assign the url.
  	
  	$ntitle = $nsite->url unless $ntitle;
+ 	$ndesc = $nsite->url unless $ndesc;
+ 	($ntags) = $nsite->url =~ m!http://(.+)! unless $ntags;
  	
- 	
- 	$nsite->title($ntitle) unless not defined $ntitle;
- 	$nsite->desc($ndesc) unless not defined $ndesc;
-    $nsite->tags($ntags) unless not defined $ntags;	
+ 	$nsite->title($ntitle);
+ 	$nsite->desc($ndesc);
+    $nsite->tags($ntags);	
     
     my $db = db->new();
     $db->data($nsite->self());
-    return $db->save("localhost:27017");
- 	
+    $db->connectMongo($host);
+    
+    return $db->save unless $db->exists({ URL => $nsite->url});
+    
+    return 0;
+    
  	} 
 
 
