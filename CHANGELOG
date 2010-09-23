@@ -1,0 +1,6 @@
+CHANGES Goblin 0.0.1 - 0.0.2
+  * Made addsite.pl just a bit cleaner but it needs more.  
+  * Added new methods to db.pm in order to make insertions and searches.
+  * You can't add sites that already exists in the database.
+  * Added Search.pl wich take the tags as arguments and show the sites that matches.
+  * Made an "Engine" class to manage the search.
