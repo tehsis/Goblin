@@ -43,11 +43,11 @@ sub save {
 	my $self = shift;
 	
 	if(@_) {
-	use MongoDB;
-	my $host = shift;
-	my $conn = MongoDB::Connection->new("host" => $host);
-	my $db = $conn->sengine;
-	my $coll = $db->sites;
+	 use MongoDB;
+	 my $host = shift;
+	 my $conn = MongoDB::Connection->new("host" => $host);
+	 my $db = $conn->sengine;
+	 my $coll = $db->sites;
     my $id = return $coll->insert($self->{data});	
     
     return $id;
