@@ -10,3 +10,9 @@ It's basically a web search engine (not yet concluded) that
 takes a website,extracts his arguments and stores them in a 
 NoSQL Database (actually, MongoDB).
 Searching is performed through website's tags and descriptions.
+
+Lib Dependencies:
+
+LWP
+MongoDB
+HTML::Manipulator
