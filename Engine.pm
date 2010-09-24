@@ -20,6 +20,8 @@ package Engine;
 use strict;
 use warnings;
 
+use Sites;
+
 sub new {
 	my $class = shift;
 	
@@ -44,7 +46,10 @@ sub search {
 		my $cursor = $db->search({TAGS => {'$all' => shift}});
 		
 		foreach my $object ($cursor->next) {
-			push(@{$self->{sites}},$object->{URL});
+			my $tempSite = Sites->new($object->{URL},$object->{TITLE},
+			$object->{DESC},$object->{TAGS});
+			
+			push(@{$self->{sites}},$tempSite);
 		}
 	}
 	
