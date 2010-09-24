@@ -24,7 +24,7 @@ use warnings;
 sub new {
   
   my $class = shift;
-  
+
   my $self = {
     TITLE => undef,
     URL => undef,
@@ -32,8 +32,19 @@ sub new {
     TAGS => [],
   };
   
+  bless($self);
+  
+  if(@_) {
+  	 $self = {
+  	 	URL => $self->url(shift),
+  	 	TITLE => $self->title(shift),
+  	 	DESC => $self->desc(shift),
+  	 	TAGS => $self->tags(shift),
+  	 };
+  }
+  
   bless($self,$class);
-
+  
   return $self;
 }
 

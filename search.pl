@@ -23,5 +23,7 @@ my $harr = $search->search(\@ARGV);
 my @array = @$harr;
 
 foreach my $result (@array) {
-	print $result."\n";
+	print $result->title."\n";
+	print $result->desc."\n";
+	print $result->url."\n";
 }

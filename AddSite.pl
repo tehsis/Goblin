@@ -53,16 +53,16 @@
  	$fetch->content($nsite->url);
  	
  	#Looks for tags
- 	($ntags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i unless $ntags;
+ 	($ntags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i;
  	($ntags) =  $fetch->content =~ m!<meta name=['"]keywords['"] content=["']\s*(.+)\s*["']!;
  	                      
  	
  	#Looks for description
- 	($ndesc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i unless $ndesc;
+ 	($ndesc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i;
  	($ndesc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
  	
  	#looks for title
- 	($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i unless $ntitle;
+ 	($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i;
  	($ntitle) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
  	($ntitle) = $fetch->content =~ m!<title>(.+)</title>!i unless $ntitle;
  	
