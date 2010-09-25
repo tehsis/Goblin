@@ -5,7 +5,6 @@ Author: Pablo Terradillos <tehsis@gmail.com>
 The main goal of this project is to aim as an experience
 in my own path to learning Perl.
 
-
 It's basically a web search engine (not yet concluded) that
 takes a website,extracts his arguments and stores them in a 
 NoSQL Database (actually, MongoDB).
@@ -16,3 +15,7 @@ Lib Dependencies:
 LWP
 MongoDB
 HTML::Manipulator
+
+In order to use the SOAP Server and client, you also need:
+
+SOAP::Lite

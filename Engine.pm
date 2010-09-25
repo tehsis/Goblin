@@ -43,7 +43,7 @@ sub search {
 		my $db = db->new;
 		$db->connectMongo($host);
 		
-		my $cursor = $db->search({TAGS => {'$all' => shift}});
+		my $cursor = $db->search({TAGS => {'$all' => @_}});
 		
 		foreach my $object ($cursor->next) {
 			my $tempSite = Sites->new($object->{URL},$object->{TITLE},
