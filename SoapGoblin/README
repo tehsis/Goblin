@@ -1,0 +1,7 @@
+This folder contains the necesarry files
+to run Goblin as a web services using SOAP.
+
+Also you can find a script to test it.
+
+Remember to modify the uri and proxy parameters
+in SoapSearch.cgi in order to get it work.
