@@ -1,3 +1,10 @@
+CHANGES Goblin 0.0.3 - 0.0.4
+  * Added xsearch and hsearch methods to the SOAP server which ouputs
+    XML and HTML.
+  * Added xsoap.pl and goblin.php in order to test xsearch and hsearch.
+  * Added an useragent to Fetcher.pm in order to avoid some 'protections'
+  * Little bugfixs to regexs in AddSite.pl.
+
 CHANGES Goblin 0.0.2 - 0.0.3
   * Class Engine now stores a list of Sites instead a list of URLs.
   * Cleared some unnecessary checks in Sites.pl
