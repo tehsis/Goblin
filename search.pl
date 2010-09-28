@@ -15,12 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with "The Goblin search engine".  If not, see <http://www.gnu.org/licenses/>.
 
-use Engine;
+use Engine debug;
 
 my $search = Engine->new;
 
-my $harr = $search->search(\@ARGV);
-my @array = @$harr;
+my @array = $search->search(\@ARGV);
 
 foreach my $result (@array) {
 	print $result->title."\n";

@@ -62,8 +62,8 @@
  	($ndesc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
  	
  	#looks for title
- 	#($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i;
- 	#($ntitle) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
+ 	($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i;
+ 	($ntitle) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
  	($ntitle) = $fetch->content =~ m!<title>(.+)</title>!i unless $ntitle;
  	
  	#If any of the previously looked site's attribute were not found, 
