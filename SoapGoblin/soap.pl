@@ -4,9 +4,12 @@ use Sites;
 
 use SOAP::Lite;
 
+my $ns = 'http://localhost/SoapSearch';
+my $host = 'http://path/to/SoapSearch.cgi';
+
 my $search = SOAP::Lite
-->uri('http://localhost/SoapSearch')
-->proxy('http://localhost/cgi-bin/Goblin/SoapSearch.cgi')
+->uri($ns)
+->proxy($host)
 ->search(\@ARGV);
 
 my @sites = $search->paramsout;

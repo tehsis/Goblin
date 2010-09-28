@@ -7,7 +7,7 @@ CHANGES Goblin 0.0.3 - 0.0.4
 
 CHANGES Goblin 0.0.2 - 0.0.3
   * Class Engine now stores a list of Sites instead a list of URLs.
-  * Cleared some unnecessary checks in Sites.pl
+  * Cleared some unnecessary checks in AddSites.pl
   * Added a SOAP server and a test client to make searches
 
 CHANGES Goblin 0.0.1 - 0.0.2
