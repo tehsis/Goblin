@@ -19,7 +19,8 @@ use Engine debug;
 
 my $search = Engine->new;
 
-my @array = $search->search(\@ARGV);
+my $harr = $search->search(\@ARGV);
+my @array = @$harr;
 
 foreach my $result (@array) {
 	print $result->title."\n";

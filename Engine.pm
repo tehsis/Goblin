@@ -44,14 +44,18 @@ sub search {
 		$db->connectMongo($host);
 		
 		my $cursor = $db->search({TAGS => {'$all' => @_}});
+
+		my @sitesarr = ();
 		
-		foreach my $object ($cursor->next) {
+		while(my $object = $cursor->next) {
 			my $tempSite = Sites->new($object->{URL},$object->{TITLE},
 			$object->{DESC},$object->{TAGS});
 			
 			push(@{$self->{sites}},$tempSite);
 		}
+
 	}
+        
 	
 	return $self->{sites};
 } 
