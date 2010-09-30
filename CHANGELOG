@@ -1,3 +1,8 @@
+CHANGES 0.0.4 - 0.1.0
+  * Added the GoblinClient php's class. It aimed to be an API for the
+    Goblin Server (see README)
+  * Goblin is now forked in two. The Goblin Client and the server.
+
 CHANGES Goblin 0.0.3 - 0.0.4
   * Added xsearch and hsearch methods to the SOAP server which ouputs
     XML and HTML.
