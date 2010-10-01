@@ -49,7 +49,6 @@ with the following libs:
  
 LWP
 MongoDB
-HTML::Manipulator
 SOAP::Lite
 
 To add a site to the database, just run "AddSite.pl http://weburl.com"
