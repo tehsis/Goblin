@@ -27,7 +27,7 @@ SOAP::Transport::HTTP::CGI
 ->dispatch_to('Goblin')
 ->handle;
 
-package SoapSearch;
+package Goblin;
 
 
 #Just to test the connection.
