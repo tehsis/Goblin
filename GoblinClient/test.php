@@ -32,8 +32,8 @@
 
 //Be sure this is ok in order to get Goblin working.
 
-$proxy ="http://mysyte.com/cgi-bin/Goblin/Goblin.cgi";
-$uri = "http://mysyte/Goblin";
+$proxy ="http://localhost/GoblinServer/Goblin.cgi";
+$uri = "http://localhost/Goblin";
 
 require('goblinclient.php');
 
@@ -42,9 +42,10 @@ $c = new GoblinClient($uri,$proxy);
 
 $search = $_GET['search'];
 
-$c->search($search);
+$c->search_memcache($search); //To search without memcache just use search
 
 
+print "<span style='background-color: #eaf666;'> <em>La b&uacute;squeda llev&oacute;: <strong>".$c->time()."</strong> segundos</em></span>";
 print $c->found();
 
 ?>

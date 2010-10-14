@@ -26,8 +26,9 @@
 
  
 class GoblinClient {
-	 private $client = NULL;
-	 private $found = "";
+	 private $client;
+	 private $found;
+         private $time;
  	
         // To make a new Client object, you need to provide the uri and proxy of
 	// the Soap server 
@@ -36,13 +37,38 @@ class GoblinClient {
 	}
 	
 	public function search($tags) {
+                $timeBefore = microtime(true);
 		$this->found = $this->client->hsearch(explode(" ",$tags));
+		$timeAfter = microtime(true);
+		$this->time = $timeAfter - $timeBefore; 
 		
 		return $this->found;
 	}
 	
+	public function search_memcache($tags) {
+		$timeBefore = microtime(true);
+		$memcache_obj = new Memcache;
+		$memcache_obj->connect('localhost',11211);
+		if(strcmp($memcache_obj->get('LastTag'),$tags) == 0) {
+			$this->found = $memcache_obj->get('search');
+		} else {	
+			$memcache_obj->replace('LastTag', $tags,0,0);
+			$this->found = $this->client->hsearch(explode(" ",$tags));
+			$memcache_obj->set('search',$this->found,0,0);
+		}
+
+		$timeAfter = microtime(true);
+		$this->time = $timeAfter - $timeBefore;
+
+		return $this->found;
+	}
+
 	public function found() {
 		return $this->found;
+	}
+
+	public function time() {
+		return $this->time;
 	}
 }
 ?>
