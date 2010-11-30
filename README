@@ -7,7 +7,7 @@ Author: Pablo Terradillos <tehsis@gmail.com>
 The "Goblin Search Engine" started as a project which it main goal
 was to aim me in my own way to learning Perl.
 Actually, it have been separated in two. The Goblin Server and Client.
-In order to comunicate each other, Goblin Server and Client relies in 
+In order to communicate each other, Goblin Server and Client relies in 
 SOAP. Read below to get into details of each one.
 
 
@@ -39,7 +39,7 @@ can mess with it and test it, so if you are not
 interested in development, i recommend you to look for
 another solution.
 
--Instalation:
+-Installation:
 
   Just copy the files included in SoapServer folder to
 a working http server path (it has been tested with
@@ -53,7 +53,7 @@ SOAP::Lite
 
 To add a site to the database, just run "AddSite.pl http://weburl.com"
 and it will take the title, description and tags from the site.
-(This is not very well implementated now, but have to work with most
+(This is not very well implemented now, but have to work with most
 "well formed" sites)
 
 ====================
@@ -63,7 +63,7 @@ and it will take the title, description and tags from the site.
 -Description:
   
   It is just an API to make searches using the Goblin Server.
-It use SOAP to make the connection bewteen both Goblins.
+It use SOAP to make the connection between both Goblins.
  Also, i provided a "test.php" example if you want to see how 
 to use it. For now, is not more complicated than instantiate
 a "GoblinClient" object, make the search using the
@@ -85,5 +85,4 @@ search($tags) method and show the results with found().
      print $c->found();
 
   ?>
-
 
