@@ -1,3 +1,6 @@
+CHANGES 0.1.0 - 0.1.1
+  * Added memcache support in Client in order to store the lastest result.
+
 CHANGES 0.0.4 - 0.1.0
   * Added the GoblinClient php's class. It aimed to be an API for the
     Goblin Server (see README)

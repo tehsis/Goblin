@@ -20,78 +20,60 @@ package db;
 use MongoDB;
 
 sub new {
-	my $class = shift;
-	
-	my $self = {
-		data => {},
-		coll => undef,
-	};
-	
-	bless($self,$class);
-	
-	return $self;
+  my $class = shift;	
+  my $self = {
+    data => {},
+    coll => undef,
+  };
+  bless($self,$class);
+  return $self;
 }
 
 sub data {
-	my $self = shift;
-	
-	if(@_) {
-		$self->{data} = shift;
-	}
-	
-	return $self->{data};
+  my $self = shift;
+  if(@_) {
+    $self->{data} = shift;
+  }
+  return $self->{data};
 }
 
 sub save {
-	my $self = shift;
-	
-    my $id = $self->{coll}->insert($self->{data});	
-    
-    return $id;
-	
+  my $self = shift;
+  my $id = $self->{coll}->insert($self->{data});	
+  return $id;
 }
 
 sub exists {
-	my $self = shift;
-	
-	if(@_) {
-	  my $search = shift;
-	  
-	  return 1 if $self->{coll}->find_one($search);	
-		
-	}
-	
-	return 0;
-	
+  my $self = shift;
+  if(@_) {
+  my $search = shift;
+    return 1 if $self->{coll}->find_one($search);	
+  }
+  return 0;
 }
 
 sub search {
-	my $self = shift;
-	
-	if(@_) {
-	  return $self->{coll}->find(shift);
-	}
-	
-	return 0;
+  my $self = shift;
+  if(@_) {
+    return $self->{coll}->find(shift);
+  }
+  return 0;
 }
 
 sub self {
-	my $self = shift;
-	
-	return $self;
+  my $self = shift;
+  return $self;
 }
 
 sub connectMongo {
-	$self = shift;
-	
-	if(@_) {
-	 my $host = shift;
-	 my $conn = MongoDB::Connection->new("host" => $host);
-	 my $db = $conn->sengine;
-	 return 1 if $self->{coll} = $db->sites;
-	}
-	
-	return 0;
+  $self = shift;
+  if(@_) {
+    my $host = shift;
+    my $conn = MongoDB::Connection->new("host" => $host);
+    my $db = $conn->sengine;
+    return 1 if $self->{coll} = $db->sites;
+  }
+  return 0;
 }
-
 1;
+
