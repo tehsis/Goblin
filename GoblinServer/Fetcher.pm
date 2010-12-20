@@ -21,39 +21,27 @@ use strict;
 use warnings;
 
 sub new {
-	my $class = shift;
-	
-	my $self = {
-		url => undef,
-		content => undef,
-	};
-	
-	bless($self,$class);
-	
-	return $self;
+  my $class = shift;	
+  my $self = {
+    url => undef,
+    content => undef,
+  };
+  bless($self,$class);
+  return $self;
 }
 
 sub content {
-	my $self = shift;
-	
-	if(@_) {
-	use LWP::UserAgent;
-	$self->{url} = shift;
-	
-	my $ua = LWP::UserAgent->new;
-	
-	my @ns_headers = (
-	  "User-Agent" => "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.10) Gecko/20100916 Firefox/3.6.10",
-	);
-	
+  my $self = shift;
+  if(@_) {
+    use LWP::UserAgent;
+    $self->{url} = shift;
+    my $ua = LWP::UserAgent->new;
+    my @ns_headers = (
+       "User-Agent" => "GoblinFetcher/github.com/tehsis/Goblin",
+    );
     my $response = $ua->get($self->{url},@ns_headers);
-    
     $self->{content} = $response->decoded_content;
-	
-	}
-	
-	return $self->{content};
-	
+  }
+  return $self->{content};
 } 
-
 1;
