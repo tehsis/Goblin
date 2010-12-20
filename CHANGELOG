@@ -1,3 +1,7 @@
+CHANGES 0.1.1 - 0.1.2
+  * Now the Addsite.pl script looks for new links at the given url
+    and store them.
+
 CHANGES 0.1.0 - 0.1.1
   * Added memcache support in Client in order to store the lastest result.
 

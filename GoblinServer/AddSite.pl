@@ -18,14 +18,19 @@
 use strict;
 use warnings;
 
+my @sitesArray;
 
-print "Please wait while we add the site... \n";
-if(store(shift)) {
-  print "Done! \n";
-} else {
-  print "Couldn't add the new site. Are you running MongoDB and is a new site? \n";
+push (@sitesArray,shift);
+
+while(@sitesArray) {
+  my $site = shift(@sitesArray);
+  print "Please wait while we add the site $site \n";
+  if(store($site)) {
+    print "Done! \n";
+  } else {
+   print "Couldn't add the new site. Are you running MongoDB and is a new site? \n";
+  }
 }
-
 sub store { 
   #TODO: Make this sub cleaner. Actually is a mess. 
   #This makes a new site and store it into a MongoDB.
@@ -48,8 +53,6 @@ sub store {
   #Looks for tags
   ($ntags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i;
   ($ntags) =  $fetch->content =~ m!<meta name=['"]keywords['"] content=["']\s*(.+)\s*["']!;
-
-
   #Looks for description
   ($ndesc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i;
   ($ndesc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
@@ -69,9 +72,8 @@ sub store {
   $db->data($nsite->self());
   $db->connectMongo($host);
   $db->save unless $db->exists({ URL => $nsite->url});
-  my $site; 
-  ($site) = $fetch->content=~ m!(http://.+\..+)!;        
-  store($site);      
+  my @newSites = $fetch->content =~ m!(?:<a href=")(http://.*?)"(?:.*)!g;
+  push(@sitesArray,@newSites);
   return 1;
 } 
 1;
