@@ -70,7 +70,7 @@ sub store {
   $nsite->tags($ntags);	
   my $db = db->new();
   $db->data($nsite->self());
-  $db->connectMongo($host);
+  $db->connect($host, "mongodb");
   $db->save unless $db->exists({ URL => $nsite->url});
   my @newSites = $fetch->content =~ m!(?:<a href=")(http://.*?)"(?:.*)!g;
   push(@sitesArray,@newSites);

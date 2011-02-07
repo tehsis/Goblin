@@ -22,6 +22,7 @@ use MongoDB;
 sub new {
   my $class = shift;	
   my $self = {
+    engine => undef,
     data => {},
     coll => undef,
   };
@@ -65,11 +66,12 @@ sub self {
   return $self;
 }
 
-sub connectMongo {
+sub connect {
   $self = shift;
   if(@_) {
     my $host = shift;
-    my $conn = MongoDB::Connection->new("host" => $host);
+    my $engine = shift; 
+    my $conn = MongoDB::Connection->new("host" => $host) if ($engine = "mongodb");
     my $db = $conn->sengine;
     return 1 if $self->{coll} = $db->sites;
   }

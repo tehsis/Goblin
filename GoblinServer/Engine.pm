@@ -41,7 +41,7 @@ sub search {
 		use db;
 		my $host = "localhost:27017";
 		my $db = db->new;
-		$db->connectMongo($host);
+		$db->connect($host, "mongodb");
 		
 		my $cursor = $db->search({TAGS => {'$all' => @_}});
 
