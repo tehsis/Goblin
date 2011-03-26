@@ -31,6 +31,7 @@ while(@sitesArray) {
    print "Couldn't add the new site. Are you running MongoDB and is a new site? \n";
   }
 }
+
 sub store { 
   #TODO: Make this sub cleaner. Actually is a mess. 
   #This makes a new site and store it into a MongoDB.
@@ -42,31 +43,27 @@ sub store {
   use Fetcher;
   use db;
   my $url = shift;
-  my $nsite = Sites->new; $nsite->url($url);
+  my $nsite = Sites->new; 
+  $nsite->url($url);
   my $ntags = undef;
   my $ntitle = undef;
   my $ndesc = undef;
   my $fetch = Fetcher->new;
   $fetch->content($nsite->url);
   
-  #Looks for tags
-  ($ntags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i;
-  ($ntags) =  $fetch->content =~ m!<meta name=['"]keywords['"] content=["']\s*(.+)\s*["']!;
-  #Looks for description
-  ($ndesc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i;
-  ($ndesc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
-  #looks for title
-  ($ntitle) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i;
-  ($ntitle) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
-  ($ntitle) = $fetch->content =~ m!<title>\n*(.+)\n*</title>!i unless $ntitle;
-  #If any of the previously looked site's attribute were not found, 
-  #it assign the url.
+  # Get site data
+  $ntags = getTags($fetch);
+  $ndesc = getDesc($fetch);
+  $ntitle = getTitle($fetch);
+  # If any of the previously looked site's attribute were not found, 
+  # it assign the url.
   $ntitle = $nsite->url unless $ntitle;
   $ndesc = $nsite->url unless $ndesc;
   ($ntags) = $nsite->url =~ m!http://(.+)! unless $ntags;
   $nsite->title($ntitle);
   $nsite->desc($ndesc);
   $nsite->tags($ntags);	
+
   my $db = db->new();
   $db->data($nsite->self());
   $db->connect("mongodb");
@@ -75,5 +72,30 @@ sub store {
   push(@sitesArray,@newSites);
   return 1;
 } 
+
+sub getTags {
+  my $fetch = shift;
+  my $tags = undef;
+  ($tags) =  $fetch->content =~ m!content=["']\s*(.+)\s*["'] name=['"]keywords['"]!i;
+  ($tags) =  $fetch->content =~ m!<meta name=['"]keywords['"] content=["']\s*(.+)\s*["']!;
+  return $tags;
+} 
+
+sub getDesc {
+  my $fetch = shift;
+  my $desc = undef;
+  ($desc) = $fetch->content =~ m!['"](.+)["'] name=["']description["']!i;
+  ($desc) = $fetch->content =~ m!<meta name=["']description["'] content=['"](.+)["']!;
+  return $desc;
+}
+
+sub getTitle {
+  my $fetch = shift;
+  my $title = undef;
+  ($title) = $fetch->content =~  m!content=["'](.+)["'] name=["']title["']!i;
+  ($title) = $fetch->content =~ m!<meta name=["']Title["'] content=["'](.+)["']!;
+  ($title) = $fetch->content =~ m!<title>\n*(.+)\n*</title>!i unless $title;
+  return $title;
+}
+
 1;
- 
