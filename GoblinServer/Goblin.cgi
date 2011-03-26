@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with "The Goblin Search Engine".  If not, see <http://www.gnu.org/licenses/>.
 
+# This package defines the SOAP webservices for Goblin
+
 
 #!/usr/bin/perl
 
@@ -29,89 +31,58 @@ SOAP::Transport::HTTP::CGI
 
 package Goblin;
 
-
-#Just to test the connection.
+# Just to test the connection.
 sub test {
-
-return "Everything Ok \n";
-
+ return "Everything Ok \n";
 }
 
 
-#Make the search using the given parameters. Returns an array of Sites
+# Make the search using the given parameters. Returns an array of Sites
 sub search {                    
-   my $self = shift;
-
-   my $search = Engine->new;
-
-   my $harr = $search->search(shift);
-
-   my @arr = @$harr;
-
-   my $result = shift @arr;
-
-   return $result;
-
+  my $self = shift;
+  my $search = Engine->new;
+  my $harr = $search->search(shift);
+  my @arr = @$harr;
+  my $result = shift @arr;
+  return $result;
 } 
 
-#Make the search using the given parameters. Returns the
-#sites with a XML syntax. 
+# Make the search using the given parameters. Returns the
+# sites with a XML syntax. 
 sub xsearch {
-   my $self = shift;
-
-   my $search = Engine->new;
-
-   my $harr = $search->search(shift);
-
-   my @arr = @$harr;
-
-
-   use Sites;
-
-   my $s = "<engine> \n";
-
-   foreach my $site(@arr) {
-     $s        = $s."<site> \n".   
-                "<name>".$site->title."</name>\n".
-                 "<desc>".$site->desc."</desc>\n".
-                 "<url>".$site->url."</url>\n".
-                 "</site> \n";
+  use Sites;
+  my $self = shift;
+  my $search = Engine->new;
+  my $harr = $search->search(shift);
+  my @arr = @$harr;
+  my $s = "<engine> \n";
+  foreach my $site(@arr) {
+    $s = $s."<site> \n".   
+         "<name>".$site->title."</name>\n".
+         "<desc>".$site->desc."</desc>\n".
+         "<url>".$site->url."</url>\n".
+         "</site> \n";
    };
-
-   $s = $s."</engine>\n";
-
-
-   return $s;
-
+  $s = $s."</engine>\n";
+  return $s;
 }
 
-#Make the search using the given parameters. Returns the
-#sites with a HTML syntax. 
+# Make the search using the given parameters. Returns the
+# sites with a HTML syntax. 
 sub hsearch {
-   my $self = shift;
-
-   my $search = Engine->new;
-
-   my $harr = $search->search(shift);
-
-   my @arr = @$harr;
-
-
-   use Sites;
-
-   my $s = "<div id='goblin_results'> \n";
-
-   foreach my $site(@arr) {
-     $s        = $s."<div id='goblin_site'> \n".
-                "<span class='title'><a href='".$site->url."'>".$site->title."</a></span> <br />\n".
-                 "<span class='desc'>".$site->desc."</span> <br />\n".
-                 "</div> \n";
+  use Sites;
+  my $self = shift;
+  my $search = Engine->new;
+  my $harr = $search->search(shift);
+  my @arr = @$harr;
+  my $s = "<div id='goblin_results'> \n";
+  foreach my $site(@arr) {
+    $s = $s."<div id='goblin_site'> \n".
+         "<span class='title'><a href='".$site->url."'>".$site->title."</a></span> <br />\n".
+         "<span class='desc'>".$site->desc."</span> <br />\n".
+         "</div> \n";
    };
-
    $s = $s."</div>\n";
-
-
    return $s;
-
 }
 

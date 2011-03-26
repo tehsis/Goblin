@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with "The Goblin search engine".  If not, see <http://www.gnu.org/licenses/>.
 
+# This package fetchs a website's content
+
 package Fetcher;
 
 use strict;

@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
+# This package defines the interface and connects the elements
+# needed by Goblin.
+
 package Engine;
 
 use strict;
@@ -23,41 +26,30 @@ use warnings;
 use Sites;
 
 sub new {
-	my $class = shift;
-	
-	my $self = {
-		sites => [],
-	};
-	
-	bless($self,$class);
-	
-	return $self;
+  my $class = shift;
+  my $self = {
+    sites => [],
+  };
+  bless($self,$class);
+  return $self;
 }
 
 sub search { 
-	my $self = shift;
-	
-	if(@_) {
-		use db;
-		my $host = "localhost:27017";
-		my $db = db->new;
-		$db->connect($host, "mongodb");
-		
-		my $cursor = $db->search({TAGS => {'$all' => @_}});
-
-		my @sitesarr = ();
-		
-		while(my $object = $cursor->next) {
-			my $tempSite = Sites->new($object->{URL},$object->{TITLE},
-			$object->{DESC},$object->{TAGS});
-			
-			push(@{$self->{sites}},$tempSite);
-		}
-
-	}
-        
-	
-	return $self->{sites};
+  my $self = shift;
+  if(@_) {
+    use db;
+    my $host = "localhost:27017";
+    my $db = db->new;
+    $db->connect($host, "mongodb");
+    my $cursor = $db->search({TAGS => {'$all' => @_}});
+    my @sitesarr = ();
+    while(my $object = $cursor->next) {
+      my $tempSite = Sites->new($object->{URL},$object->{TITLE},
+      $object->{DESC},$object->{TAGS});
+      push(@{$self->{sites}},$tempSite);
+    }
+  }
+  return $self->{sites};
 } 
 
 1;

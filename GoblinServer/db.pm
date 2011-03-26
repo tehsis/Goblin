@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with "The Goblin search engine".  If not, see <http://www.gnu.org/licenses/>.
 
+# This package defines a facade for using databases with Goblin.
+# It uses MongoDB so far but is intended to serve for multiple
+# engines.
+
 package db;
 
 use MongoDB;
