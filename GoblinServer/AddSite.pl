@@ -42,7 +42,6 @@ sub store {
   use Fetcher;
   use db;
   my $url = shift;
-  my $host = "localhost:27017";
   my $nsite = Sites->new; $nsite->url($url);
   my $ntags = undef;
   my $ntitle = undef;
@@ -70,8 +69,8 @@ sub store {
   $nsite->tags($ntags);	
   my $db = db->new();
   $db->data($nsite->self());
-  $db->connect($host, "mongodb");
-  $db->save unless $db->exists({ URL => $nsite->url});
+  $db->connect("mongodb");
+  $db->save unless $db->exists({ URL => $nsite->url });
   my @newSites = $fetch->content =~ m!(?:<a href=")(http://.*?)"(?:.*)!g;
   push(@sitesArray,@newSites);
   return 1;

@@ -69,8 +69,8 @@ sub self {
 sub connect {
   $self = shift;
   if(@_) {
-    my $host = shift;
     my $engine = shift; 
+    my $host = (shift or "localhost:27017");
     my $conn = MongoDB::Connection->new("host" => $host) if ($engine = "mongodb");
     my $db = $conn->sengine;
     return 1 if $self->{coll} = $db->sites;
