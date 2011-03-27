@@ -1,3 +1,6 @@
+CHANGES 0.1.2 - 0.1.3
+  * Minor changes improving code readability 
+
 CHANGES 0.1.1 - 0.1.2
   * Now the Addsite.pl script looks for new links at the given url
     and store them.
@@ -13,7 +16,7 @@ CHANGES 0.0.4 - 0.1.0
   * Goblin is now forked in two. The Goblin Client and the server.
 
 CHANGES Goblin 0.0.3 - 0.0.4
-  * Added xsearch and hsearch methods to the SOAP server which ouputs
+  * Added xsearch and hsearch methods to the SOAP server which outputs
     XML and HTML.
   * Added xsoap.pl and goblin.php in order to test xsearch and hsearch.
   * Added an useragent to Fetcher.pm in order to avoid some 'protections'
@@ -28,5 +31,5 @@ CHANGES Goblin 0.0.1 - 0.0.2
   * Made addsite.pl just a bit cleaner but it needs more.  
   * Added new methods to db.pm in order to make insertions and searches.
   * You can't add sites that already exists in the database.
-  * Added Search.pl wich take the tags as arguments and show the sites that matches.
+  * Added Search.pl which take the tags as arguments and show the sites that matches.
   * Made an "Engine" class to manage the search.

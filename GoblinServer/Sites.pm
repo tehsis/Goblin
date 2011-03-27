@@ -31,6 +31,7 @@ sub new {
     URL => undef,
     DESC => undef,
     TAGS => [],
+    BODY => undef,
   };
   bless($self);
   if(@_) {
@@ -48,7 +49,9 @@ sub new {
 
 sub title {
   my $self = shift;
-  if(@_) { $self->{TITLE} = shift}
+  if(@_) {
+     $self->{TITLE} = shift
+  }
   return $self->{TITLE};
 }
 
@@ -67,7 +70,9 @@ sub url {
 
 sub desc {
   my $self = shift;
-  if(@_) { $self->{DESC} = shift}
+  if(@_) { 
+    $self->{DESC} = shift
+  }
   return $self->{DESC};
 }
 
@@ -77,6 +82,14 @@ sub tags {
     push(@{$self->{TAGS}},split(/\s*,\s*/,shift)); 
   }
   return @{$self->{TAGS}};
+}
+
+sub body {
+  my $self = shift;
+  if (@_) {
+    $self->{BODY} = shift
+  }
+  return $self->{BODY}
 }
 
 sub self {

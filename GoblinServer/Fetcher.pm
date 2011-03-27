@@ -39,7 +39,7 @@ sub content {
     $self->{url} = shift;
     my $ua = LWP::UserAgent->new;
     my @ns_headers = (
-       "User-Agent" => "GoblinFetcher/github.com/tehsis/Goblin",
+       "User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110321 Firefox/4.0",
     );
     my $response = $ua->get($self->{url},@ns_headers);
     $self->{content} = $response->decoded_content;
