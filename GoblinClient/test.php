@@ -16,7 +16,7 @@
 # along with "The Goblin Search Engine".  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!-- This file was made only for testing porpuses -->
+<!-- IMPORTANT: This file was made only for testing porpuses -->
 
 <html>
 <head>
@@ -30,8 +30,7 @@
 
 <?php
 
-//Be sure this is ok in order to get Goblin working.
-
+// Check this data in order to get the example working.
 $proxy ="http://localhost/GoblinServer/Goblin.cgi";
 $uri = "http://localhost/Goblin";
 
@@ -39,14 +38,12 @@ require('goblinclient.php');
 
 $c = new GoblinClient($uri,$proxy);
 
-
-$search = $_GET['search'];
-
-$c->search_memcache($search); //To search without memcache just use search
-
-
-print "<span style='background-color: #eaf666;'> <em>La b&uacute;squeda llev&oacute;: <strong>".$c->time()."</strong> segundos</em></span>";
-print $c->found();
+if ($_GET) {
+  $search = $_GET['search'];
+  $c->search_memcache($search); //To search without memcache just use search
+  print $c->found();
+  print "<span style='background-color: #eaf666;'> <em>La b&uacute;squeda llev&oacute;: <strong>".$c->time()."</strong> segundos</em></span>";
+}
 
 ?>
 
