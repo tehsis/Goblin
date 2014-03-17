@@ -6,10 +6,8 @@ Introduction
 
 The "Goblin Search Engine" started as a project which it main goal
 was to aim me in my own way to learning Perl.
-Actually, it have been separated in two. The Goblin Server and Client.
-In order to communicate each other, Goblin Server and Client relies in 
-SOAP. Read below to get into details of each one.
 
+I do not provide clear instructions to build it, since it's not intended to be a real product, I don't plan to maintaine it and I think you have to be insane if you want to try this irl.
 
 
 Goblin Server
@@ -18,27 +16,23 @@ Goblin Server
 Description
 -
   
-  The "Goblin Server" pretends to be an "Open search engine"
-which you could install or modify so you can use it for your
-own project.
-  To get it working you need an http server with perl support
+The "Goblin Server" was a little experiment to play by making a "web search engine" and
+serves me to learn some concepts of Perl and regex. 
+
+To get it working you need an http server with perl support
 (look below for libs dependencies)
-  Actually, it relies on MongoDB. So you'll need it working
+
+Actually, it relies on MongoDB. So you'll need it working
 if you want to use this.
 
-  Remember that Goblin (for now) comes with no indexed sites.
+Remember that Goblin (for now) comes with no indexed sites.
 You must add some sites with "addSite.pl" script if you
 want to see something working.
-  As i've said before, Goblin relies in MongoDB. Actually,
+
+As i've said before, Goblin relies in MongoDB. Actually,
 it doesn't make searches more sophisticated than a simple
 "search by tags". This will be improved in the future,
 but for now is not more than that.
-
-  Last but not least, for now it is on a HEAVY development
-state and is distributed with no more goals than you
-can mess with it and test it, so if you are not
-interested in development, i recommend you to look for
-another solution.
 
 Installation
 -
