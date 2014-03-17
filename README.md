@@ -1,8 +1,8 @@
-"The Goblin search engine"
+The Goblin search engine
+=
 
-Author: Pablo Terradillos <tehsis@gmail.com>
-
-- Introduction:
+Introduction
+-
 
 The "Goblin Search Engine" started as a project which it main goal
 was to aim me in my own way to learning Perl.
@@ -11,11 +11,12 @@ In order to communicate each other, Goblin Server and Client relies in
 SOAP. Read below to get into details of each one.
 
 
-====================
-== Goblin Server ===
-====================
 
--Description:
+Goblin Server
+=
+
+Description
+-
   
   The "Goblin Server" pretends to be an "Open search engine"
 which you could install or modify so you can use it for your
@@ -39,7 +40,8 @@ can mess with it and test it, so if you are not
 interested in development, i recommend you to look for
 another solution.
 
--Installation:
+Installation
+-
 
   Just copy the files included in SoapServer folder to
 a working http server path (it has been tested with
@@ -56,21 +58,23 @@ and it will take the title, description and tags from the site.
 (This is not very well implemented now, but have to work with most
 "well formed" sites)
 
-====================
-== Goblin Client ===
-====================
 
--Description:
-  
-  It is just an API to make searches using the Goblin Server.
+Goblin Client
+=
+
+Description
+-  
+
+It is just an API to make searches using the Goblin Server.
 It use SOAP to make the connection between both Goblins.
  Also, i provided a "test.php" example if you want to see how 
 to use it. For now, is not more complicated than instantiate
 a "GoblinClient" object, make the search using the
 search($tags) method and show the results with found().
 
-  Example:
+Example:
 
+```php
   <?php
      require("goblinclient.php");
  
@@ -85,4 +89,5 @@ search($tags) method and show the results with found().
      print $c->found();
 
   ?>
+```
 
