@@ -29,7 +29,7 @@ Remember that Goblin (for now) comes with no indexed sites.
 You must add some sites with "addSite.pl" script if you
 want to see something working.
 
-As i've said before, Goblin relies in MongoDB. Actually,
+As i've said before, Goblin relies on MongoDB. Actually,
 it doesn't make searches more sophisticated than a simple
 "search by tags". This will be improved in the future,
 but for now is not more than that.
