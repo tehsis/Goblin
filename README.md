@@ -7,7 +7,7 @@ Introduction
 The "Goblin Search Engine" started as a project which it main goal
 was to aim me in my own way to learning Perl.
 
-I do not provide clear instructions to build it, since it's not intended to be a real product, I don't plan to maintaine it and I think you have to be insane if you want to try this irl.
+I do not provide clear instructions to build it, since it's not intended to be a real product, I don't plan to maintain it and I think you have to be insane if you want to try this irl.
 
 
 Goblin Server
