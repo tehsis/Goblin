@@ -22,7 +22,7 @@ serves me to learn some concepts of Perl and regex.
 To get it working you need an http server with perl support
 (look below for libs dependencies)
 
-Actually, it relies on MongoDB. So you'll need it working
+It relies on MongoDB. So you'll need it working
 if you want to use this.
 
 Remember that Goblin (for now) comes with no indexed sites.
